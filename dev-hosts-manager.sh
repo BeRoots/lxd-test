@@ -68,7 +68,7 @@ fi
 ## BEGIN Variables ############################################################
 container_image="debian/11/cloud"
 project_name="myproj"
-openvpn_container_names=(openvpn-ra openvpn-s2s)
+openvpn_container_names=(cont-a cont-b)
 ## END Variables ##############################################################
 
 
@@ -186,6 +186,9 @@ cluster: null' | lxd init --preseed; ((rc=rc+$?))
   fi
 
   # create project if not exist yet
+  # (features.profiles=true seems cause problems to create profile without inherit from the default project)
+  # (features.storage.volumes=false seems good for using the actual LXD default configuration. @TODO ask for dedicated storage per project)
+  # (features.networks=true be bad because not allow bridge network creation)
   if [[ $(lxc project list | grep -c $project_name) -eq 0 ]]; then
     runuser -p -u $LOGNAME -- \
       lxc project create \
