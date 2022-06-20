@@ -67,7 +67,7 @@ fi
 
 ## BEGIN Variables ############################################################
 container_image="debian/11/cloud"
-project_name="openvpn"
+project_name="myproj"
 openvpn_container_names=(openvpn-ra openvpn-s2s)
 ## END Variables ##############################################################
 
